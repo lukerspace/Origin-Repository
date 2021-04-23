@@ -1,7 +1,16 @@
 from flask import *
+import json
+import mysql.connector 
+from flask import *
+from sql import cursor, conn , mysql_select
+
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+app.config["JSON_SORT_KEYS"] = False
+
+conn=mysql.connector.connect(host = "localhost",user = "root",password = "0000", database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
+cursor=conn.cursor()
 
 # Pages
 @app.route("/")
@@ -17,4 +26,48 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
+
+@app.route('/api/attractions')
+def attractions():
+	if request.args.get('page'):
+		page = request.args.get('page')
+		page=int(page)
+		index = page * 12
+		print("目前頁面:",page)
+		print("起始ID:",index+1)
+		next_page_JSON = page + 1
+		if request.args.get('keyword'):
+			keyword =request.args.get('keyword')
+			attraction_JSON = mysql_select("SELECT * FROM attraction WHERE name LIKE"+ f" \'{keyword}\' ")
+			next_list= [] #全部顯示null
+			if len(next_list) == 0:
+				next_page_JSON = None
+			data = {"nextPage": next_page_JSON,"data": attraction_JSON}
+			return jsonify(data)
+		else:
+			attraction_JSON = mysql_select(f"SELECT * FROM attraction LIMIT {index}, 12")
+			next_list = mysql_select(f"SELECT * FROM attraction LIMIT {index + 12}, 12")
+			if len(next_list) == 0:
+				next_page_JSON = None
+			data = {"nextPage": next_page_JSON,"data": attraction_JSON}
+			return jsonify(data)
+	return {"error": True,"message": "伺服器內部錯誤"}, 500
+
+@app.route('/api/attraction/<int:ID>')
+def api_attraction(ID):
+	if ID:
+		cursor.execute(f"SELECT * FROM attraction where id={ID}")
+		data = cursor.fetchone()
+		if data:
+			attraction = {"data": dict(zip(cursor.column_names, data))}
+			attraction['data']['images'] = json.loads(data[9])
+			return attraction
+		return jsonify({ "error": True, "message": "景點編號不正確" })
+	
+	return jsonify({ "error": True, "message": "伺服器內部錯誤" })
+
+
 app.run(port=3000)
+
+
+
