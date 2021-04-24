@@ -3,13 +3,20 @@ import json
 import mysql.connector 
 from flask import *
 from sql import cursor, conn , mysql_select
+from getpass import getpass
+from config import Config
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"] = False
 
-conn=mysql.connector.connect(host = "localhost",user = "root",password = "0000", database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
+conn=mysql.connector.connect(
+		host = "localhost",
+		user=input("Enter username: "),
+		password=getpass("Enter password: "),
+		database = "taipei",charset = "utf8",
+		auth_plugin='mysql_native_password')
 cursor=conn.cursor()
 
 # Pages
