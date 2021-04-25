@@ -4,7 +4,7 @@ import mysql.connector
 from flask import *
 from sql import cursor, conn , mysql_select
 from getpass import getpass
-from config import Config
+# from config import Config
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
@@ -40,13 +40,11 @@ def attractions():
 		page = request.args.get('page')
 		page=int(page)
 		index = page * 12
-		print("目前頁面:",page)
-		print("起始ID:",index+1)
 		next_page_JSON = page + 1
 		if request.args.get('keyword'):
 			keyword =request.args.get('keyword')
-			attraction_JSON = mysql_select("SELECT * FROM attraction WHERE name LIKE"+ f" \'{keyword}\' ")
-			next_list= [] #全部顯示null
+			attraction_JSON = mysql_select(f"SELECT * FROM attraction WHERE name LIKE '%{keyword}%' LIMIT {index},12")
+			next_list= mysql_select(f"SELECT * FROM attraction WHERE name LIKE '%{keyword}%' LIMIT {index + 12}, 12")
 			if len(next_list) == 0:
 				next_page_JSON = None
 			data = {"nextPage": next_page_JSON,"data": attraction_JSON}
@@ -54,6 +52,9 @@ def attractions():
 		else:
 			attraction_JSON = mysql_select(f"SELECT * FROM attraction LIMIT {index}, 12")
 			next_list = mysql_select(f"SELECT * FROM attraction LIMIT {index + 12}, 12")
+			print("目前頁面:",page)
+			if index+1<320:
+				print("起始ID:",index+1)
 			if len(next_list) == 0:
 				next_page_JSON = None
 			data = {"nextPage": next_page_JSON,"data": attraction_JSON}
