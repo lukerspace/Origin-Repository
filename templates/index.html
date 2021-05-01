@@ -1,0 +1,25 @@
+{% extends "basic.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+{% block title %}台北一日遊-首頁{% endblock %}
+{% block main %}
+
+    <section class="banner">
+        <div class="banner-box">
+            <h2>輕鬆享受台北日悠閒</h2>
+            <p>探索每個角落體驗城市的深度旅遊行程</p>
+            <form action="#" class="form" id="SearchForm">
+                <input type="text" class="input" placeholder="輸入關鍵字.." id="SearchKey">
+                <button class="search-btn" id="searchBtn"><img src="{{url_for('static',filename='pic/search.png')}}" alt="搜尋"></button>
+            </form>
+        </div>
+    </section>
+
+    <section class="mains" id="mains">
+    </section>
+
+{% endblock %}
+{% block script %}
+    <script src="{{url_for('static',filename='index.js')}}"></script>
+{% endblock %}

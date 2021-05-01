@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/media.css')}}">
+	{% block css %}{% endblock %}
+    <style>
+    	*{
+		    margin: 0;
+		    padding: 0;
+		    border: none;
+		    box-sizing: border-box;
+		}
+		body{
+		    font-family:Arial, Helvetica, sans-serif;
+		    font-size: 16px;
+		    background-color: #fff;
+		}
+		.header{
+		    background-color:#fff;
+		    position: fixed;
+		    width: 100%;
+		    height:54px;
+		    box-shadow: 0 0 20px #aabbcc86;
+		}
+		.header-box{
+		    margin: 0 auto;
+		    display:flex;
+		    align-items:center;
+		    justify-content:flex-start;
+		    max-width: 1200px;
+		    width: 90%;
+		    height:100%;
+		}
+		h1{
+		    margin: 10px 0;
+		    line-height:34px;
+		    font-weight: 700;
+		    font-size: 30px;
+		    color: #448899;
+		    height:34px;
+		    vertical-align: middle;
+		}
+		.navbar{
+		    margin-left: auto;
+		    display: flex;
+		}
+		.navbar ul li{
+		    display: inline;
+		    padding: 2.5px;
+		    margin: 7.5px;
+		    font-size: 16px;
+		    list-style: none;
+		    border-bottom: 2px solid transparent;
+		    transition: border-bottom 0.1s;
+		}
+		.navbar ul li:hover{
+		    text-decoration:none;
+		    bottom: 1px solid #666666;
+
+		}
+		.navbar ul li a{
+		    text-decoration: none;
+		    color: #666666;
+		}
+		footer{
+		    background-color:#757575;
+		    justify-content:center;
+		    align-items:center;
+		    display: flex;
+		    
+		}
+		footer p{
+		    margin:45px auto;
+		    color: #fff;
+		    font-weight: 700;
+		}
+		.occupy-fixed-height{
+		    position: relative;
+		    padding-top:54px;
+		    width:100%;
+		    visibility: hidden;
+		}
+        
+        
+    </style>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="header-box">
+                <h1>台北一日遊</h1>
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="#">預定行程</a></li>
+                        <li><a href="#">登入註冊</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="occupy-fixed-height"></div>
+    </header>
+
+    <main>{% block main %}{% endblock %}</main>
+
+    <footer><p>COPYRIGHT © 2021 台北一日遊</p></footer>
+
+    {% block script %}{% endblock %}
+</body>
+</html>
