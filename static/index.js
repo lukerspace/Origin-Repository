@@ -1,6 +1,6 @@
 let Main = document.getElementById('mains');
 //取得main的主要頁面
-let ip = "127.0.0.1"
+let ip = "54.254.130.122"
 let nextPage = 0;
 let section;
 let keyword = null;
