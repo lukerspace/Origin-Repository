@@ -174,9 +174,7 @@ SearchForm.addEventListener('submit',(event)=>{
 })
 //2-1 將屏幕上內容去除
 function RemoveAll(){
-    while(Main.firstChild){
-        Main.removeChild(Main.lastChild);
-    }
+    while(Main.firstChild){Main.removeChild(Main.lastChild);}
 }
 
 
