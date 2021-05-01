@@ -28,7 +28,6 @@
 }
 
 
-/* search bar */
 .form{
     margin-top:25px;
     display: flex;
@@ -76,7 +75,6 @@
     height:30px;
 }
 
-/************* attractions gallery *************/
 
 .mains{
     width: 90%;
@@ -141,11 +139,7 @@
     font-size: 20px;
 }
 
-/***************************************/
-/************* media query *************/
-/***************************************/
 
-/* for smaller desktop screen */
 @media only screen and (max-width:1333px){
 
     .banner{
