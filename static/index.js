@@ -1,9 +1,7 @@
 let Main = document.getElementById('mains');
 //取得main的主要頁面
 let ip = "54.254.130.122"
-let nextPage = 0;
-let section;
-let keyword = null;
+
 
 //5. 將每個參數的欄位狀況，設計進去html的架構之中
 //<article>
@@ -20,7 +18,9 @@ let keyword = null;
 //將page_list的json內容寫入attr_url超連結每個區塊之中。
 //再將整體超連結{{標籤為a (attr_url)}} 丟進box中，box為整個attraction方塊
 //回傳box
-
+let nextPage = 0;
+let section;
+let keyword = null;
 function CreateItems(attraction){
 
     let box = document.createElement('article');
