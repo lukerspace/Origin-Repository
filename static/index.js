@@ -97,10 +97,13 @@ async function GetData(pageNumber, keyword=null){
     let url;
     if(keyword){
         url = `http://${ip}:3000/api/attractions?page=${pageNumber}&keyword=${keyword}`;
-    //5-1 得到資料API中的KEYWORD資料
+    
+        //5-1此部分為查找關鍵字以及頁數預設page=0    
+        //5-1 得到資料API中的KEYWORD資料
     }else{
         url = `http://${ip}:3000/api/attractions?page=${pageNumber}`;
     }
+    //此部分為首頁頁數
     let response = await fetch(url);
     let data = await response.json();
     nextPage = data.nextPage;
