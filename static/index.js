@@ -129,6 +129,9 @@ function ShowData(){
         Main.appendChild(message);
     }
 }
+
+
+
 //6. 檢查是否所有單一頁面資料都已經成功LOAD並且決定是否要LOAD下一頁的資料
 let load_next = false;
 function CheckPoint(){
@@ -139,7 +142,9 @@ function CheckPoint(){
     }
 }
 
-// 1.呼叫call LoadData() keyword預設為null
+// 初始1.呼叫call LoadData() keyword預設為null
+
+
 LoadData(); 
 
 //7. infinite scroll設定
@@ -148,8 +153,7 @@ LoadData();
 //進入GetData(nextPage,keyword=null)
 
 if(nextPage !== null){
-    window.addEventListener('scroll',()=>{
-        if((window.innerHeight + window.scrollY) >= (document.body.getBoundingClientRect().bottom - 700) && load_next){
+    window.addEventListener('scroll',()=>{if((window.innerHeight + window.scrollY) >= (document.body.getBoundingClientRect().bottom - 700) && load_next){
             LoadData(keyword);
             load_next = false;
         }
