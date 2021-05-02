@@ -1,3 +1,4 @@
+//取得主業架構框框
 let Main = document.getElementById('mains');
 //取得main的主要頁面
 let ip = "54.254.130.122"
@@ -18,9 +19,12 @@ let ip = "54.254.130.122"
 //將page_list的json內容寫入attr_url超連結每個區塊之中。
 //再將整體超連結{{標籤為a (attr_url)}} 丟進box中，box為整個attraction方塊
 //回傳box
+
+//createElement預設項目
 let nextPage = 0;
 let section;
 let keyword = null;
+
 function CreateItems(attraction){
 
     let box = document.createElement('article');
@@ -39,6 +43,7 @@ function CreateItems(attraction){
     //並且透過load_next的變化流程控制，下12個資料的寫入
     
     //{{7-1}}關鍵字流程如上
+    //關鍵字設定
     let attr_text = document.createElement('div');
     attr_text.classList.add('textbox');
     
@@ -82,8 +87,7 @@ function CreateItems(attraction){
 async function LoadData(keyword=null){
     if(nextPage !== null){
         nextPage = await GetData(nextPage,keyword);
-        ShowData();
-    }
+        ShowData();}
 }
 
 // 3.將我的預設=0的nextPage導入GetData(pageNumber)中 {{此處函數output會更新nextPage}}
@@ -112,6 +116,7 @@ async function GetData(pageNumber, keyword=null){
 // 預設initiator=0
 
 //{{6-1}} 透過關鍵字搜索得到的API匯入CREATEITEMS函數中
+
 let initiator = 0;
 
 function ShowData(){
