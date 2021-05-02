@@ -1,0 +1,14 @@
+
+@media only screen and (max-width:600px){
+    .header-container{width: 100%;}
+    h1{margin-left: 10px}
+    .header-navbar ul li{font-size: 14px;}
+}
+
+@media only screen and (max-width:340px){
+    h1{font-size: 24px;}
+    .header-navbar ul li{font-size: 14px;}
+}
+
+
+
