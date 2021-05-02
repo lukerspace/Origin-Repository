@@ -77,7 +77,8 @@ function CreateItems(attraction){
     
     return box;
 }
-// load and visualize attraction calling GetData and ShowData function
+
+
 // 2.利用LoadData從api取得資料串列。
 // 若是沒有關鍵字，即是查找keyword= null。並且若是有下一頁，將nextPage更新至下一頁。
 // 並呼叫ShowData() 函數。
