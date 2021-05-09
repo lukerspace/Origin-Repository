@@ -5,7 +5,6 @@ let Main = document.getElementById('mains');
 // 54.254.130.122
 
 let ip = "54.254.130.122"
-let nextPage = 0;
 let section;
 let keyword = null;
 
