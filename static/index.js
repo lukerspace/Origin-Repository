@@ -1,3 +1,4 @@
+//取得主業架構框框
 let Main = document.getElementById('mains');
 //取得main的主要頁面
 // 遠端ip
@@ -24,6 +25,11 @@ let keyword = null;
 //再將整體超連結{{標籤為a (attr_url)}} 丟進box中，box為整個attraction方塊
 //回傳box
 
+//createElement預設項目
+let nextPage = 0;
+let section;
+let keyword = null;
+
 function CreateItems(attraction){
 
     let box = document.createElement('article');
@@ -42,6 +48,7 @@ function CreateItems(attraction){
     //並且透過load_next的變化流程控制，下12個資料的寫入
     
     //{{7-1}}關鍵字流程如上
+    //關鍵字設定
     let attr_text = document.createElement('div');
     attr_text.classList.add('textbox');
     
@@ -75,7 +82,8 @@ function CreateItems(attraction){
     
     return box;
 }
-// load and visualize attraction calling GetData and ShowData function
+
+
 // 2.利用LoadData從api取得資料串列。
 // 若是沒有關鍵字，即是查找keyword= null。並且若是有下一頁，將nextPage更新至下一頁。
 // 並呼叫ShowData() 函數。
@@ -97,10 +105,13 @@ async function GetData(pageNumber, keyword=null){
     let url;
     if(keyword){
         url = `http://${ip}:3000/api/attractions?page=${pageNumber}&keyword=${keyword}`;
-    //5-1 得到資料API中的KEYWORD資料
+    
+        //5-1此部分為查找關鍵字以及頁數預設page=0    
+        //5-1 得到資料API中的KEYWORD資料
     }else{
         url = `http://${ip}:3000/api/attractions?page=${pageNumber}`;
     }
+    //此部分為首頁頁數
     let response = await fetch(url);
     let data = await response.json();
     nextPage = data.nextPage;
@@ -116,6 +127,7 @@ async function GetData(pageNumber, keyword=null){
 // 預設initiator=0
 
 //{{6-1}} 透過關鍵字搜索得到的API匯入CREATEITEMS函數中
+
 let initiator = 0;
 
 function ShowData(){
@@ -133,6 +145,9 @@ function ShowData(){
         Main.appendChild(message);
     }
 }
+
+
+
 //6. 檢查是否所有單一頁面資料都已經成功LOAD並且決定是否要LOAD下一頁的資料
 // let load_next = false;
 // function CheckPoint(){
@@ -143,7 +158,9 @@ function ShowData(){
 //     }
 // }
 
-// 1.呼叫call LoadData() keyword預設為null
+// 初始1.呼叫call LoadData() keyword預設為null
+
+
 LoadData(); 
 
 //7. infinite scroll設定
@@ -152,8 +169,7 @@ LoadData();
 //進入GetData(nextPage,keyword=null)
 
 if(nextPage !== null){
-    window.addEventListener('scroll',()=>{
-        if((window.innerHeight + window.scrollY) >= (document.body.getBoundingClientRect().bottom - 700) && load_next){
+    window.addEventListener('scroll',()=>{if((window.innerHeight + window.scrollY) >= (document.body.getBoundingClientRect().bottom - 700) && load_next){
             LoadData(keyword);
             load_next = false;
         }
@@ -178,9 +194,7 @@ SearchForm.addEventListener('submit',(event)=>{
 })
 //2-1 將屏幕上內容去除
 function RemoveAll(){
-    while(Main.firstChild){
-        Main.removeChild(Main.lastChild);
-    }
+    while(Main.firstChild){Main.removeChild(Main.lastChild);}
 }
 
 // week3
