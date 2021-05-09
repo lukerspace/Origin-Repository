@@ -1,0 +1,82 @@
+{% extends "basic.html" %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/page.css')}}">
+{% endblock %}
+
+
+{% block title %}
+    台北一日遊 - 景點
+{% endblock %}
+
+
+{% block main %}
+    <div class="gallery">
+        <div class="up">
+<!--藝廊  -->
+            <section class="images_gallery">
+                <div class="loader" id="loader"></div>
+                <img src="{{url_for('static', filename='pic/left.png')}}" alt="" class="left" id="prev">
+                <img src="{{url_for('static', filename='pic/right.png')}}" alt="" class="right" id="next">
+                <div class="selector" id="selector"></div>
+                <div class="slide" id="slide"></div>
+            </section>
+
+            <section class="booking">
+                <h3 class="text-reg" id="name"></h3>
+                <p class="text-reg info"><span id="category"></span><span id="mrt"></span></p>
+<!--導購 -->
+                
+                <article class="booktext">
+                    <p class="text-reg">訂購導覽行程</p>
+                    <p class="text-reg">以此景點為中心的一日行程，帶您探索城市角落故事</p>
+<!--欄位-->
+                    
+                    <form action="/booking" class="bookingform">
+                        <div class="date">
+                            <label for="bookingDate" class="text-reg">選擇日期：</label>
+                            <input type="date" name="date" id="bookingDate" min=2021-05-07>
+                        </div>
+<!--日期 -->
+                        
+                        <div class="time" id="timeSwitch">
+                            <span class="text-reg">選擇時間：</span>
+                            <input type="radio" id="morning" name="time" value="morning" checked>
+                            <label for="morning" class="label-morning" class="morning-label">上半天</label>
+                            <input type="radio" id="afternoon" name="time" value="afternoon">
+                            <label for="afternoon" >下半天</label>
+                        
+                        
+                        </div>
+                        <p><span class="text-reg price">導覽費用：</span><span>新台幣</span><span id="price"> 2000 元</span></p>
+                        <button >開始預訂行程</button>
+                    </form>
+                </article>
+            </section>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="bottom">
+
+            <article class="text-reg description" id="description"></article>
+
+            <article class="address">
+                <p class="text-reg">景點地址：</p>
+                <p class="text-reg" id="address"></p>
+            </article>
+            
+            <article class="transportation">
+                <p class="text-reg">交通方式：</p>
+                <p class="text-reg" id="transport"></p>
+            </article>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script src="{{url_for('static',filename='page.js')}}"></script>
+{% endblock %}

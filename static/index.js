@@ -1,6 +1,9 @@
 //取得主業架構框框
 let Main = document.getElementById('mains');
 //取得main的主要頁面
+// 遠端ip
+// 54.254.130.122
+
 let ip = "54.254.130.122"
 
 
@@ -31,12 +34,12 @@ function CreateItems(attraction){
     box.classList.add('itembox');
 
     let attr_url = document.createElement('a');
-    attr_url.href = `http://${ip}:3000/api/attraction/${attraction.id}`
+    attr_url.href = `http://${ip}:3000/attraction/${attraction.id}`
     attr_url.setAttribute('target', '_blank');
     
     let attr_img = document.createElement('img');
     attr_img.src = attraction.images[0]
-    attr_img.addEventListener('load',CheckPoint);
+    // attr_img.addEventListener('load',CheckPoint);
 
     //6. 製作attractionbox載入資料及照片時，每12個須紀錄換頁動作
     //執行CheckPoint函數，完成12個attraction寫入後，將load_next改成true載入下一頁
@@ -77,7 +80,8 @@ function CreateItems(attraction){
     
     return box;
 }
-// load and visualize attraction calling GetData and ShowData function
+
+
 // 2.利用LoadData從api取得資料串列。
 // 若是沒有關鍵字，即是查找keyword= null。並且若是有下一頁，將nextPage更新至下一頁。
 // 並呼叫ShowData() 函數。
@@ -87,7 +91,9 @@ function CreateItems(attraction){
 async function LoadData(keyword=null){
     if(nextPage !== null){
         nextPage = await GetData(nextPage,keyword);
-        ShowData();}
+        ShowData()
+        load_next = true;
+    }
 }
 
 // 3.將我的預設=0的nextPage導入GetData(pageNumber)中 {{此處函數output會更新nextPage}}
@@ -141,14 +147,14 @@ function ShowData(){
 
 
 //6. 檢查是否所有單一頁面資料都已經成功LOAD並且決定是否要LOAD下一頁的資料
-let load_next = false;
-function CheckPoint(){
-    initiator++;
-    if(initiator === section && nextPage !== null){
-        console.log(initiator,"attractions are already loaded")
-        load_next = true;
-    }
-}
+// let load_next = false;
+// function CheckPoint(){
+//     initiator++;
+//     if(initiator === section && nextPage !== null){
+//         console.log(initiator,"attractions are already loaded")
+//         load_next = true;
+//     }
+// }
 
 // 初始1.呼叫call LoadData() keyword預設為null
 
@@ -189,7 +195,9 @@ function RemoveAll(){
     while(Main.firstChild){Main.removeChild(Main.lastChild);}
 }
 
-
+// week3
+//流程控制上將load_next直接在資料載入時確認，取消掉跑完每個頁面的資料後才更正的狀況。
+//並且將load_next的條件加入在infinite_roll之中，是以無須等到載入所有資料後才進行load_next的允許。
 
 
 
