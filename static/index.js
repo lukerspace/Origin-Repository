@@ -5,8 +5,7 @@ let Main = document.getElementById('mains');
 // 54.254.130.122
 
 let ip = "54.254.130.122"
-let section;
-let keyword = null;
+
 
 //5. 將每個參數的欄位狀況，設計進去html的架構之中
 //<article>
