@@ -23,9 +23,8 @@
 }
 
 
-/************* carousel *************/
 
-/* carousel container and images */
+
 .images_gallery{
     width:540px;
     height:400px;
@@ -57,7 +56,7 @@
     opacity: 0;
 }
 
-/* arrow */
+
 
 .left, .right{
     position: absolute;
@@ -89,7 +88,7 @@
 }
 
 
-/* images indicator */
+
 .selector{
     position:absolute;
     bottom:10px;
@@ -117,7 +116,7 @@
     background-color:#448899;
 }
 
-/* loader */
+
 
 .loader{
     position: absolute;
