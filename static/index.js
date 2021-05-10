@@ -37,8 +37,25 @@ function CreateItems(attraction){
     attr_url.href = `http://${ip}:3000/attraction/${attraction.id}`
     attr_url.setAttribute('target', '_blank');
     
-    let attr_img = document.createElement('img');
+
+    // 
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('image-container'); 
+    // 增加spinner
+    const loadingSpinner = document.createElement('div');
+    loadingSpinner.classList.add('loader');
+    // 
+    
+    
+    const attr_img = document.createElement('img');
     attr_img.src = attraction.images[0]
+    // 
+    attr_img.classList.add('loading')
+    // 
+    // 
+    imageContainer.appendChild(loadingSpinner);
+    imageContainer.appendChild(attr_img);
+    // 
     // attr_img.addEventListener('load',CheckPoint);
 
     //6. 製作attractionbox載入資料及照片時，每12個須紀錄換頁動作
@@ -70,14 +87,25 @@ function CreateItems(attraction){
     
     attr_text.appendChild(attr_info);
     attr_text.appendChild(attr_title);
-    
-    attr_url.appendChild(attr_img);
-    attr_url.appendChild(attr_text);
 
+// 
+    attr_url.appendChild(imageContainer);
+    attr_url.appendChild(attr_text);
+// 
+    
+    
+    
     
     box.appendChild(attr_url);
     console.log(box);
     
+    // 
+    attr_img.addEventListener('load', () => {
+        loadingSpinner.hidden = true;
+        attr_img.classList.remove('loading');
+    })
+    // 
+    // 
     return box;
 }
 
