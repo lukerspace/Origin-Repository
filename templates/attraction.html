@@ -14,7 +14,7 @@
 {% block main %}
     <div class="gallery">
         <div class="up">
-
+<!--藝廊  -->
             <section class="images_gallery">
                 <div class="loader" id="loader"></div>
                 <img src="{{url_for('static', filename='pic/left.png')}}" alt="" class="left" id="prev">
@@ -26,22 +26,28 @@
             <section class="booking">
                 <h3 class="reg" id="name"></h3>
                 <p class="text-reg info"><span id="category"></span><span id="mrt"></span></p>
+<!--導購 -->
                 
                 <article class="booktext">
                     <p class="reg">訂購導覽行程</p>
                     <p class="text-reg">以此景點為中心的一日行程，帶您探索城市角落故事</p>
-
+<!--欄位-->
+                    
                     <form action="/booking" class="bookingform">
                         <div class="date">
                             <label for="bookingDate" class="text-reg">選擇日期：</label>
                             <input type="date" name="date" id="bookingDate" min=2021-05-07>
                         </div>
+<!--日期 -->
+                        
                         <div class="time" id="timeSwitch">
                             <span class="reg">選擇時間：</span>
                             <input type="radio" id="morning" name="time" value="morning" checked>
                             <label for="morning" class="label-morning" class="morning-label">上半天</label>
                             <input type="radio" id="afternoon" name="time" value="afternoon">
                             <label for="afternoon" >下半天</label>
+                        
+                        
                         </div>
                         <p><span class="reg price">導覽費用：</span><span id="price">新台幣2000 元</span></p>
                         <button class="reg">開始預訂行程</button>
