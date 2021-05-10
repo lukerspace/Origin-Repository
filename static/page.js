@@ -128,10 +128,10 @@ let timeSwitch = document.getElementById('timeSwitch');
 
 function price_func(){
     if(morning.checked){
-        price.innerText = "2000 元"
+        price.innerText = "新台幣2000 元"
     }
     else if(night.checked){         
-        price.innerText = "2500 元"
+        price.innerText = "新台幣2500 元"
     }
 }
 timeSwitch.addEventListener('change',price_func)
