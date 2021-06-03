@@ -97,7 +97,7 @@ function CreateItems(attraction){
     
     
     box.appendChild(attr_url);
-    console.log(box);
+    // console.log(box);
     
     // 
     attr_img.addEventListener('load', () => {
@@ -116,6 +116,7 @@ function CreateItems(attraction){
 
 // 4-1 {{關鍵字設定}}
 // 透過input的keyword及函數預設的nextpage=0匯入GetPata(0,keyword)
+let load_next = false
 async function LoadData(keyword=null){
     if(nextPage !== null){
         nextPage = await GetData(nextPage,keyword);
@@ -202,6 +203,7 @@ if(nextPage !== null){
     })
 }
 
+
 // 關鍵字設定流程
 // 取得INDEX.HTML關鍵字ID
 const SearchForm= document.getElementById('SearchForm');
@@ -226,8 +228,6 @@ function RemoveAll(){
 // week3
 //流程控制上將load_next直接在資料載入時確認，取消掉跑完每個頁面的資料後才更正的狀況。
 //並且將load_next的條件加入在infinite_roll之中，是以無須等到載入所有資料後才進行load_next的允許。
-
-
 
 
 

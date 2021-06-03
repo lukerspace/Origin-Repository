@@ -1,19 +1,26 @@
-# from config import Config
 from flask import *
-import json
-import mysql.connector 
-from sql import cursor, conn , mysql_select
 from getpass import getpass
 from config import Config
-from api.attraction_api import attraction_api
+# import os
+# import json
+# import mysql.connector 
 
+from api.attraction_api import appAttraction 
+from api.user_api import appUser
+from api.book_api import appBooking
+from api.order_api import api_order
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config["JSON_SORT_KEYS"] = False
+app.secret_key="hello"
 
-app.register_blueprint(attraction_api, url_prefix='/api')
+
+app.register_blueprint(appAttraction, url_prefix='/api')
+app.register_blueprint(appUser, url_prefix='/api')
+app.register_blueprint(appBooking, url_prefix='/api')
+app.register_blueprint(api_order, url_prefix="/api")
 
 # Pages
 @app.route("/")
@@ -28,8 +35,6 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
-
-
 
 app.run(port=3000)
 # app.run(host="0.0.0.0",port=3000)
