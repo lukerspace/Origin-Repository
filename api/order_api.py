@@ -72,7 +72,7 @@ def postOrders():
          tappayRequest = json.dumps({
             "prime": prime,
             "partner_key": os.getenv("PARTNER_KEY"),
-            "merchant_id": "zxcvbn848_ESUN",
+            "merchant_id": "sssssssssss",
             "details": "Tappay test",
             "amount": price,
             "cardholder": {
