@@ -77,11 +77,9 @@
    </div>
 </form>
 <br>
-<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
-<script src="https://js.tappaysdk.com/tpdirect/v5.5.1"></script>
 {% endblock %}
 
 {% block script %}
-<!-- <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script> -->
-<!-- <script> TPDirect.setupSDK(APP_ID, 'APP_KEY', 'sandbox') </script> -->
+<script src="https://js.tappaysdk.com/tpdirect/v5.7.0"></script>
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
 {% endblock %}

@@ -202,7 +202,7 @@ function deleteBookingDetermine(deleteSuccess, deleteFailed) {
 // tappay使用
 /* Tappay */
 TPDirect.setupSDK(20515, 'app_wUOX6d5cn7egzxWkR9dlKOIEeiSK8OpyPrufNd0pQlBjQEWGQVoV6mmfQs3F', 'sandbox');
-
+// TPDirect.card.setup(config)
 TPDirect.card.setup({
    fields: {
       number: {
@@ -253,17 +253,22 @@ TPDirect.card.onUpdate(update => {
 });
 
 
+
+
 /* go /api/order */
 const orderForm = document.getElementById('order-form');
 orderForm.addEventListener('submit', e => {
    e.preventDefault();
 
-   const yes = confirm('您確定要訂購此行程並付款嗎？');
+   const yes = confirm('要訂購此行程並付款嗎？');
    if (yes) {
       getPrime();
    }
    return;
 });
+
+
+
 
 function getPrime() {
    // 取得 TapPay Fields 的 status
@@ -286,6 +291,8 @@ function getPrime() {
       goOrder(prime);
    });
 }
+
+
 
 function refreshOrder() {
    const src = '/api/booking';
@@ -379,8 +386,3 @@ function goOrder(prime) {
       .catch(err => console.log('錯誤', err));   
 }
 
-
-
-// 
-// 
-// 

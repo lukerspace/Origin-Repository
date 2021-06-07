@@ -83,27 +83,6 @@ function removeEmptyFieldReminder(){
     }
 }
 
-// function showMessage(error_type, targetElement){
-//     switch(error_type){
-//         case 'a':
-//             targetElement.textContent = "請先登出";
-//             break;
-//         case 'b':
-//             targetElement.textContent = "此電子郵件已被使用"
-//             break;
-//         case 'c':
-//             targetElement.textContent = "所有欄位不可為空白"
-//             break;
-//         case 'd':
-//             targetElement.textContent = "密碼錯誤"
-//             break;
-//         case 'e':
-//             targetElement.textContent = "此電子郵件尚未註冊"
-//             break;
-//     }
-// }
-
-// =========================================================================
 
 
 // 以下事件處理，函數處理
@@ -213,6 +192,9 @@ logInForm.addEventListener('submit', evt => {
         })
     }
 })
+
+
+
 // function signin(e){
 //     e.preventDefault()
 //     const data = {
@@ -323,7 +305,6 @@ signUpForm.addEventListener('submit', evt => {
     }
 })
 
-
 // function signup(e){
 //     e.preventDefault()
 //     const data = {
@@ -351,6 +332,7 @@ signUpForm.addEventListener('submit', evt => {
 //         }
 //     })
 // }
+
 for(let inputField of inputFields){
     inputField.addEventListener('focus', ()=>{
         if(inputField.parentElement.classList.contains('error')){

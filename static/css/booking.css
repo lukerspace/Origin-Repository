@@ -67,15 +67,11 @@
   height: 30px;
 }
 
-
-
- 
 .delete-icon:hover {
    cursor: pointer;
    transform: scale(1.1);
    margin-right: 0%;
 }
-
 
 /* .booking .booking-attraction .delete-icon:hover {
   cursor: pointer;
@@ -116,7 +112,6 @@
   padding-top: 10px;
 }
 
-
 .booking .booking-attraction .information .name {
   font-family: Noto Sans TC;
   font-style: normal;
@@ -155,7 +150,6 @@
 
   color: #666666;
 }
-
 .booking .booking-attraction .information .detail .date,
 .booking .booking-attraction .information .detail .time,
 .booking .booking-attraction .information .detail .fee,
@@ -335,17 +329,6 @@ hr {
 .hide{
    display:none;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

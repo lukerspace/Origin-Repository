@@ -510,7 +510,8 @@ def selectOrders(userId):
 #    finally:
 #       closePool(connection_object, taipeiCursor)
 
-# ????
+
+
 def insertOrder(**kwargs):
    try:
       insertColumn = ''
