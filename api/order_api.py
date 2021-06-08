@@ -20,6 +20,7 @@ def postOrders():
       if "user" in session:
          # Set Main Keys to Variables
          requestJson = request.get_json()
+         print(requestJson)
          orderJson = requestJson["order"]
          tripJson = orderJson["trip"]
          attractionJson = tripJson["attraction"]
@@ -59,11 +60,13 @@ def postOrders():
          insertOrder(attractionId = attractionId, userId = userId, phone = contactPhone, number = orderNumber, price = price, date = date, time = time, status = 1)
 
          insertedOrder = selectOrder(orderNumber, userId)
-
+         print("訂單編號成立:",orderNumber)
+         
          if not insertedOrder:
             return jsonify({ "error": True, "message": "訂單建立失敗，輸入不正確或其他原因" })
          
-         # Deal with prime API
+         # 取得 prime API
+         # 將PRIME取得後傳到後端
          payByPrime_Url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
          headers = {
             "Content-Type": "application/json",
@@ -72,7 +75,7 @@ def postOrders():
          tappayRequest = json.dumps({
             "prime": prime,
             "partner_key": os.getenv("PARTNER_KEY"),
-            "merchant_id": "sssssssssss",
+            "merchant_id": "random_ESUN",
             "details": "Tappay test",
             "amount": price,
             "cardholder": {
@@ -84,8 +87,15 @@ def postOrders():
                "nation_id": "",
             }
          })
+         print("tappay::",tappayRequest)
+
          response = requests.post(payByPrime_Url, data = tappayRequest, headers = headers, timeout = 30)
+         
          res = response.json()
+         print("res回復:",res)
+
+
+
 
          if res["status"] == 0:
             updateOrder(orderNumber, status = res["status"])
@@ -107,7 +117,7 @@ def postOrders():
                "number": insertedOrder["number"],
                "payment": {
                   "status": insertedOrder["status"],
-                  "message": message
+                  "message": message         
                }
             }
             return jsonify({ "data": orderData })

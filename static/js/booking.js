@@ -259,7 +259,6 @@ TPDirect.card.onUpdate(update => {
 const orderForm = document.getElementById('order-form');
 orderForm.addEventListener('submit', e => {
    e.preventDefault();
-
    const yes = confirm('要訂購此行程並付款嗎？');
    if (yes) {
       getPrime();
@@ -271,23 +270,24 @@ orderForm.addEventListener('submit', e => {
 
 
 function getPrime() {
+   console.log("yes get prime")
    // 取得 TapPay Fields 的 status
    const tappayStatus = TPDirect.card.getTappayFieldsStatus();
 
    // 確認是否可以 getPrime
    if (tappayStatus.canGetPrime === false) {
       console.log('can not get prime');
-      return;
+      return console.log("1");
    }
-   
    // Get prime
    TPDirect.card.getPrime(result => {
       if (result.status !== 0) {
          console.log('get prime error ' + result.msg);
-         return;
+         return console.log("2");
       }
-      // console.log('get prime success, prime: ' + result.card.prime);
       const prime = result.card.prime;
+      console.log('成功取得prime: ' + prime);
+      
       goOrder(prime);
    });
 }
@@ -322,15 +322,12 @@ function refreshOrder() {
 
 function goOrder(prime) {
    const priceInput = document.getElementById('total-price');
-
    const attractionIdInput = document.getElementById('attraction-id');
    const attractionNameInput = document.getElementById('attraction-name');
    const addressInput = document.getElementById('address');
    const imageInput = document.getElementById('attraction-image');
-
    const dateInput = document.getElementById('date');
    const timeInput = document.getElementById('time');
-
    const nameInput = document.getElementById('name');
    const emailInput = document.getElementById('email');
    const phoneNumberInput = document.getElementById('phone-number');
@@ -365,10 +362,13 @@ function goOrder(prime) {
       })
    })
       .then(response => response.json())
+      
       .then(result => {
+         console.log("!!!",result)
          const orderData = result.data;
+         console.log(orderData)
          const orderFailed = result.error;
-         
+         console.log(orderFailed)
          if (orderData) {            
             refreshOrder();
             

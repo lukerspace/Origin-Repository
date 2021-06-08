@@ -1,7 +1,7 @@
 
 {% extends "basic.html" %}
 
-{% block title %}台北一日遊{% endblock %}
+{% block title %}台北一日遊-訂購{% endblock %}
 
 {% block css %}<link href="{{ url_for('static', filename='css/booking.css') }}" rel="stylesheet" type="text/css" media="all">{% endblock %}
 
@@ -46,7 +46,7 @@
          <label for="email">連絡信箱：</label>
          <input type="email" name="email" id="email" placeholder="請輸入信箱" required>
          <label for="phone-number">手機號碼：</label>
-         <input type="tel" name="phone-number" id="phone-number" placeholder="請輸入手機" required> 
+         <input type="tel" name="phone-number" id="phone-number" placeholder="請輸入手機" pattern="09\d{8}" required> 
          <!-- pattern="09\d{2}-\d{3}-\d{3}" required> -->
       </div>
       <div class="notice-message">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
@@ -82,4 +82,5 @@
 {% block script %}
 <script src="https://js.tappaysdk.com/tpdirect/v5.7.0"></script>
 <script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/order.js') }}"></script> -->
 {% endblock %}

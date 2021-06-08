@@ -7,7 +7,6 @@ function emptyFieldReminder(inputField, message){
     errorMessage.textContent = message;
 }
 
-
 function getBookingInfo(){
     let attrId = parseInt(location.pathname.split('/').pop());
     
@@ -45,7 +44,6 @@ bookingDateInput.addEventListener('focus',()=>{
         bookingDateInput.parentElement.classList.remove('error');
     }
 })
-
 
 document.getElementById('bookingBtn').addEventListener('click', (evt)=>{
     evt.preventDefault();

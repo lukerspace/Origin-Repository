@@ -7,11 +7,12 @@ function getUser() {
       .then(response => response.json())
       .then(result => {
          const userData = result.data;
-
+         console.log(userData)
          if (userData) {
             username = userData.name;
 
             getOrder();
+            console.log(username)
          } else {
             parent.location.href = '/';
          }
@@ -40,6 +41,10 @@ function getOrder() {
       })
       .catch(error => console.log(error));
 }
+
+
+
+
 
 function createDetermine(orderData) {
    if (orderData == null) {
