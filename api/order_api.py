@@ -20,7 +20,7 @@ def postOrders():
       if "user" in session:
          # Set Main Keys to Variables
          requestJson = request.get_json()
-         print(requestJson)
+         # print(requestJson)
          orderJson = requestJson["order"]
          tripJson = orderJson["trip"]
          attractionJson = tripJson["attraction"]
@@ -60,7 +60,7 @@ def postOrders():
          insertOrder(attractionId = attractionId, userId = userId, phone = contactPhone, number = orderNumber, price = price, date = date, time = time, status = 1)
 
          insertedOrder = selectOrder(orderNumber, userId)
-         print("訂單編號成立:",orderNumber)
+         # print("訂單編號成立:",orderNumber)
          
          if not insertedOrder:
             return jsonify({ "error": True, "message": "訂單建立失敗，輸入不正確或其他原因" })
@@ -87,12 +87,12 @@ def postOrders():
                "nation_id": "",
             }
          })
-         print("tappay::",tappayRequest)
+         # print("tappay::",tappayRequest)
 
          response = requests.post(payByPrime_Url, data = tappayRequest, headers = headers, timeout = 30)
          
          res = response.json()
-         print("res回復:",res)
+         # print("res回復:",res)
 
 
 

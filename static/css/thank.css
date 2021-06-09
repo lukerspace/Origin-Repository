@@ -9,12 +9,12 @@
     line-height: 16px;
  
     display: flex;
-    align-items: start;
+    align-items: center;
  
     margin: 55px auto;
     padding: 0px 100px;
  
-    width: var(--content-width);
+    width: 1200px;
     max-width: 90%;
  
     color: #666666;
@@ -26,15 +26,15 @@
     gap: 35px;
  
     position: relative;
-    top: 54px;
+    top: 55px;
  
     margin-bottom: 55px;
     margin-left: auto;
     margin-right: auto;
     padding: 0px 100px;
     
-    width: var(--content-width);
-    max-width: 90%;
+    width: 1200px;
+    max-width: 87%;
     min-height: 65vh;
  }
  

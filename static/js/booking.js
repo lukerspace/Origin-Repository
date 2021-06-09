@@ -146,7 +146,7 @@ function createAPIElement(bookingData) {
    document.getElementById('total-price').value = price;
 }
 
-/* delete icon */
+/* 刪除功能*/
 const deleteIcons = document.getElementsByClassName('delete-icon');
 
 Array.from(deleteIcons).forEach(deleteIcon => {
@@ -196,11 +196,8 @@ function deleteBookingDetermine(deleteSuccess, deleteFailed) {
 }
 
 
-
-
 // 串接prime
-// tappay使用
-/* Tappay */
+
 TPDirect.setupSDK(20515, 'app_wUOX6d5cn7egzxWkR9dlKOIEeiSK8OpyPrufNd0pQlBjQEWGQVoV6mmfQs3F', 'sandbox');
 // TPDirect.card.setup(config)
 TPDirect.card.setup({
@@ -259,7 +256,7 @@ TPDirect.card.onUpdate(update => {
 const orderForm = document.getElementById('order-form');
 orderForm.addEventListener('submit', e => {
    e.preventDefault();
-   const yes = confirm('要訂購此行程並付款嗎？');
+   const yes = confirm('您要訂購此行程並付款嗎？');
    if (yes) {
       getPrime();
    }
@@ -286,7 +283,7 @@ function getPrime() {
          return console.log("2");
       }
       const prime = result.card.prime;
-      console.log('成功取得prime: ' + prime);
+      // console.log('成功取得prime: ' + prime);
       
       goOrder(prime);
    });
@@ -364,11 +361,10 @@ function goOrder(prime) {
       .then(response => response.json())
       
       .then(result => {
-         console.log("!!!",result)
          const orderData = result.data;
-         console.log(orderData)
+         // console.log(orderData)
          const orderFailed = result.error;
-         console.log(orderFailed)
+         // console.log(orderFailed)
          if (orderData) {            
             refreshOrder();
             
