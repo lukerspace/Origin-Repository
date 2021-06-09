@@ -46,3 +46,19 @@ CREATE TABLE booking(
         REFERENCES user(id)
         ON DELETE CASCADE
 );
+
+
+CREATE TABLE orders(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    number VARCHAR(255),
+    userId INT NOT NULL,
+    attractionId INT NOT NULL,
+    date DATE NOT NULL,
+    time ENUM("morning", "afternoon") NOT NULL,
+    price INT NOT NULL,
+    phone VARCHAR(255),
+    status BOOLEAN DEFAULT false,
+    FOREIGN KEY(userId)
+        REFERENCES user(id)
+        ON DELETE CASCADE
+);
