@@ -33,20 +33,6 @@ CREATE TABLE attraction(
     images JSON
 );
 
-CREATE TABLE booking(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    attraction_id INT NOT NULL,
-    date DATE NOT NULL,
-    time ENUM("morning", "afternoon") NOT NULL,
-    price INT NOT NULL,
-    order_number VARCHAR(255),
-    refund BOOLEAN DEFAULT false,
-    FOREIGN KEY(user_id)
-        REFERENCES user(id)
-        ON DELETE CASCADE
-);
-
 
 CREATE TABLE orders(
     id INT PRIMARY KEY AUTO_INCREMENT,
