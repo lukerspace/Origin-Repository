@@ -4,8 +4,8 @@ let Main = document.getElementById('mains');
 // 遠端ip
 // 54.254.130.122
 
-// let ip = "54.254.130.122"
-let ip = "127.0.0.1"
+let ip = "54.254.130.122"
+// let ip = "127.0.0.1"
 
 //5. 將每個參數的欄位狀況，設計進去html的架構之中
 //<article>
