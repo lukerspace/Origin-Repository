@@ -37,5 +37,6 @@ def thankyou():
 	return render_template("thankyou.html")
 
 # app.run(port=3000)
+# 
 app.run(host="0.0.0.0",port=3000)
 
