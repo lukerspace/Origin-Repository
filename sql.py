@@ -103,7 +103,7 @@ def user_insert(**kargs):
    column = column[:-1] + ')'
    value = value[:-1] + ')'
    sql += column + ' VALUES ' + value
-   print(sql)
+   # print(sql)
    cursor.execute(sql)
    conn.commit()
    cursor.close()

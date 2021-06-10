@@ -2,11 +2,12 @@
 let Main = document.getElementById('mains');
 //取得main的主要頁面
 // 遠端ip
-// 54.254.130.122
-
-let ip = "54.254.130.122"
+// let ip = "54.254.130.122"
 // let ip = "127.0.0.1"
 
+
+
+// console.log(`${window.origin}/attraction`,"fix version")
 //5. 將每個參數的欄位狀況，設計進去html的架構之中
 //<article>
 //  <a>整個api連結內容
@@ -34,7 +35,8 @@ function CreateItems(attraction){
     box.classList.add('itembox');
 
     let attr_url = document.createElement('a');
-    attr_url.href = `http://${ip}:3000/attraction/${attraction.id}`
+    // attr_url.href = `${window.origin}/attraction/${attraction.id}`
+    attr_url.href =`${window.origin}/attraction/${attraction.id}`
     attr_url.setAttribute('target', '_blank');
     
 
@@ -131,12 +133,14 @@ async function LoadData(keyword=null){
 async function GetData(pageNumber, keyword=null){
     let url;
     if(keyword){
-        url = `http://${ip}:3000/api/attractions?page=${pageNumber}&keyword=${keyword}`;
+        url= `${window.origin}/api/attractions?page=${pageNumber}&keyword=${keyword}`;
+        // url = `http://${ip}:3000/api/attractions?page=${pageNumber}&keyword=${keyword}`;
     
         //5-1此部分為查找關鍵字以及頁數預設page=0    
         //5-1 得到資料API中的KEYWORD資料
     }else{
-        url = `http://${ip}:3000/api/attractions?page=${pageNumber}`;
+        url= `${window.origin}/api/attractions?page=${pageNumber}`;
+        // url = `http://${ip}:3000/api/attractions?page=${pageNumber}`;
     }
     //此部分為首頁頁數
     let response = await fetch(url);
