@@ -17,18 +17,18 @@ cursor = conn.cursor()
 load_dotenv()
 # 只適用在booking sql
 
-try:
-   connection_pool = pooling.MySQLConnectionPool(
-      host = os.getenv("SERVER_HOST"),
-      # port = os.getenv("SERVER_PORT"),
-      user = os.getenv("SERVER_USER"),
-      password = os.getenv("SERVER_PASSWORD"),
-      database = "taipei",
-      charset = "utf8",
-      auth_plugin='mysql_native_password'
-      )
-except Exception as e:
-   print(e)  
+# try:
+#    connection_pool = pooling.MySQLConnectionPool(
+#       host = os.getenv("SERVER_HOST"),
+#       # port = os.getenv("SERVER_PORT"),
+#       user = os.getenv("SERVER_USER"),
+#       password = os.getenv("SERVER_PASSWORD"),
+#       database = "taipei",
+#       charset = "utf8",
+#       auth_plugin='mysql_native_password'
+#       )
+# except Exception as e:
+#    print(e)  
 
 # taipeiDB = init_db()
 # taipeiCursor = taipeiDB.cursor()
@@ -251,6 +251,18 @@ def deleteBookingData(**kwargs):
 # for /api/order
 def insertOrder(**kwargs):
    try:
+      connection_pool = pooling.MySQLConnectionPool(
+         host = os.getenv("SERVER_HOST"),
+         # port = os.getenv("SERVER_PORT"),
+         user = os.getenv("SERVER_USER"),
+         password = os.getenv("SERVER_PASSWORD"),
+         database = "taipei",
+         charset = "utf8",
+         auth_plugin='mysql_native_password'
+         )
+   except Exception as e:
+      print(e)  
+   try:
       insertColumn = ''
       insertValue = ''
 
@@ -281,6 +293,18 @@ def insertOrder(**kwargs):
       closePool(connection_object, taipeiCursor)        
 
 def selectOrder(number, userId):
+   try:
+      connection_pool = pooling.MySQLConnectionPool(
+         host = os.getenv("SERVER_HOST"),
+         # port = os.getenv("SERVER_PORT"),
+         user = os.getenv("SERVER_USER"),
+         password = os.getenv("SERVER_PASSWORD"),
+         database = "taipei",
+         charset = "utf8",
+         auth_plugin='mysql_native_password'
+         )
+   except Exception as e:
+      print(e)  
    try:
       sql_cmd = f"""
                SELECT 
@@ -313,6 +337,19 @@ def selectOrder(number, userId):
 
 def updateOrder(number, **kwargs):
    try:
+      connection_pool = pooling.MySQLConnectionPool(
+         host = os.getenv("SERVER_HOST"),
+         # port = os.getenv("SERVER_PORT"),
+         user = os.getenv("SERVER_USER"),
+         password = os.getenv("SERVER_PASSWORD"),
+         database = "taipei",
+         charset = "utf8",
+         auth_plugin='mysql_native_password'
+         )
+   except Exception as e:
+      print(e)  
+
+   try:
       updateColumnAndValue = ""
 
       for key in kwargs:
@@ -341,6 +378,18 @@ def updateOrder(number, **kwargs):
       closePool(connection_object, taipeiCursor)
 
 def selectOrders(userId):
+   try:
+      connection_pool = pooling.MySQLConnectionPool(
+         host = os.getenv("SERVER_HOST"),
+         # port = os.getenv("SERVER_PORT"),
+         user = os.getenv("SERVER_USER"),
+         password = os.getenv("SERVER_PASSWORD"),
+         database = "taipei",
+         charset = "utf8",
+         auth_plugin='mysql_native_password'
+         )
+   except Exception as e:
+      print(e)  
    orderDataList = []
    try:
       sql_cmd = f"""
@@ -373,6 +422,18 @@ def selectOrders(userId):
 
 def insertOrder(**kwargs):
    try:
+      connection_pool = pooling.MySQLConnectionPool(
+         host = os.getenv("SERVER_HOST"),
+         # port = os.getenv("SERVER_PORT"),
+         user = os.getenv("SERVER_USER"),
+         password = os.getenv("SERVER_PASSWORD"),
+         database = "taipei",
+         charset = "utf8",
+         auth_plugin='mysql_native_password'
+         )
+   except Exception as e:
+      print(e)  
+   try:
       insertColumn = ''
       insertValue = ''
 
@@ -403,6 +464,18 @@ def insertOrder(**kwargs):
       closePool(connection_object, taipeiCursor)        
 
 def selectOrder(number, userId):
+   try:
+      connection_pool = pooling.MySQLConnectionPool(
+         host = os.getenv("SERVER_HOST"),
+         # port = os.getenv("SERVER_PORT"),
+         user = os.getenv("SERVER_USER"),
+         password = os.getenv("SERVER_PASSWORD"),
+         database = "taipei",
+         charset = "utf8",
+         auth_plugin='mysql_native_password'
+         )
+   except Exception as e:
+      print(e)     
    try:
       sql_cmd = f"""
                SELECT 
@@ -435,6 +508,18 @@ def selectOrder(number, userId):
 
 def updateOrder(number, **kwargs):
    try:
+      connection_pool = pooling.MySQLConnectionPool(
+         host = os.getenv("SERVER_HOST"),
+         # port = os.getenv("SERVER_PORT"),
+         user = os.getenv("SERVER_USER"),
+         password = os.getenv("SERVER_PASSWORD"),
+         database = "taipei",
+         charset = "utf8",
+         auth_plugin='mysql_native_password'
+         )
+   except Exception as e:
+      print(e)  
+   try:
       updateColumnAndValue = ""
 
       for key in kwargs:
@@ -463,6 +548,18 @@ def updateOrder(number, **kwargs):
       closePool(connection_object, taipeiCursor)
 
 def selectOrders(userId):
+   try:
+      connection_pool = pooling.MySQLConnectionPool(
+         host = os.getenv("SERVER_HOST"),
+         # port = os.getenv("SERVER_PORT"),
+         user = os.getenv("SERVER_USER"),
+         password = os.getenv("SERVER_PASSWORD"),
+         database = "taipei",
+         charset = "utf8",
+         auth_plugin='mysql_native_password'
+         )
+   except Exception as e:
+      print(e)  
    orderDataList = []
    try:
       sql_cmd = f"""
