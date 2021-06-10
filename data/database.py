@@ -44,5 +44,4 @@ with open("taipei-attractions.json", "r", encoding="utf-8") as f:
 
 
 
-# import os
-# print("当前路径 -> %s" %os.getcwd())
+# print("當前路徑 -> %s" %os.getcwd())

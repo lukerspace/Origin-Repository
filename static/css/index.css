@@ -3,8 +3,8 @@
     background-repeat: no-repeat, no-repeat;
     width:100%;
     height: 320px;
-    background-image: url('../pic/cks.png'), linear-gradient(135deg, #AADDEE, #66AABB);
-    background-position: bottom left 80%, top;
+    background-image: url('../pic/cks.png'), linear-gradient(1222deg, #AADDEE, #41c2e2);
+    background-position: bottom left 60%, bottom;
     background-size: contain, cover;
    
 }
@@ -145,6 +145,47 @@
 .attraction-mrt {
     font-weight: bolder;
 }
+
+.image-container .loader{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    border: 7px solid #F8F8F8;
+    border-top: 7px solid #d7eaf1;
+    width: 67.5px;
+    height:67.5px;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin{
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+
+.image-container{
+    position:relative;
+    width:100%;
+}
+.image-container .loading{
+    filter:opacity(50%);
+}
+.image-container img{
+    position:relative; 
+    width:100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    overflow: hidden;
+    height:162px;
+    filter:opacity(100%);
+    transition: filter 0.8s;
+}
+
 
 
 /* RWD */

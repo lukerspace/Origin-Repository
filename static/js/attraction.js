@@ -11,7 +11,7 @@ async function GetData(){
     //將取得的資料得到json格式
     const data = await r.json();  
     attraction_data = data['data'];
-    console.log(attraction_data)
+    // console.log(attraction_data)
 };
 
 
@@ -82,8 +82,8 @@ let next = document.getElementById('next');
 let img_handler = gallery.children;//取得圖片SECTION中所有物件
 let progress_handler = progressor.children;//取得文字SECTION部分中所有物件
 
-console.log(img_handler)
-console.log(progress_handler)
+// console.log(img_handler)
+// console.log(progress_handler)
 let img_index = 0;
 
 prev.addEventListener('click',() => {
@@ -128,10 +128,10 @@ let timeSwitch = document.getElementById('timeSwitch');
 
 function price_func(){
     if(morning.checked){
-        price.innerText = "2000 元"
+        price.innerText = "新台幣2000 元"
     }
     else if(night.checked){         
-        price.innerText = "2500 元"
+        price.innerText = "新台幣2500 元"
     }
 }
 timeSwitch.addEventListener('change',price_func)
@@ -153,7 +153,6 @@ async function main(){
     text_func();
     date_func();
 }
-
 
 main();
 

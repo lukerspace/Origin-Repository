@@ -1,0 +1,86 @@
+
+{% extends "basic.html" %}
+
+{% block title %}台北一日遊 - 訂購{% endblock %}
+
+{% block css %}<link href="{{ url_for('static', filename='css/booking.css') }}" rel="stylesheet" type="text/css" media="all">{% endblock %}
+
+
+
+{% block main %}
+<div class="welcome"></div>
+
+<form method="POST" class="booking"  id="order-form">
+   <div class="hide" id="bookingContent">
+   <div class="booking-attraction">
+      <div class="attraction-image"></div>
+      <input type="hidden" id="attraction-image">
+      <div class="information">
+         <input type="hidden" id="attraction-id">
+         <div class="name"></div>
+         <input type="hidden" id="attraction-name">
+         <div class="detail">
+            <div class="date-title">日期：</div>
+            <div class="date"></div>
+            <input type="hidden" id="date">
+            <div class="time-title">時間：</div>
+            <div class="time"></div>
+            <input type="hidden" id="time">
+            <div class="fee-title">費用：</div>
+            <div class="fee"></div>
+            <div class="address-title">地點：</div>
+            <div class="address"></div>
+            <input type="hidden" id="address">
+         </div>
+      </div>
+      <div class="delete-icon"><img src="../static/pic/icon_delete.png" alt=""></div>  
+   </div>
+   <br>
+   <hr>
+   <br>
+   <div class="user-data">
+      <div cl ss="title">您的聯絡資訊</div>
+      <div class="user-detail">
+         <label for="name">聯絡姓名：</label>
+         <input type="text" name="name" id="name" placeholder="請輸入姓名" required>
+         <label for="email">連絡信箱：</label>
+         <input type="email" name="email" id="email" placeholder="請輸入信箱" required>
+         <label for="phone-number">手機號碼：</label>
+         <input type="tel" name="phone-number" id="phone-number" placeholder="請輸入手機" pattern="09\d{8}" required> 
+         <!-- pattern="09\d{2}-\d{3}-\d{3}" required> -->
+      </div>
+      <div class="notice-message">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
+   </div>
+   <br>
+   <hr>
+   <br>
+   <div class="credit-card-data">
+      <div class="title">信用卡付款資訊</div>
+      <div class="credit-card-detail">
+         <label for="card-number">卡片號碼：</label>
+         <div class="tappay-card" id="card-number"></div>
+         <label for="overdue-date">過期時間：</label>
+         <div class="tappay-card" id="overdue-date"></div>
+         <label for="verified-password">驗證密碼：</label>
+         <div class="tappay-card" id="verified-password"></div>
+      </div>
+   </div>
+   <br>
+   <hr>
+   <br>
+   <div class="final-check">
+      <div class="total-price"></div>
+      <input type="hidden" id="total-price">
+      <input type="hidden" id="prime">
+      <button type="submit" class="submit-button" id="order-button" disabled>確認訂購並付款</button>
+   </div>
+   </div>
+</form>
+<br>
+{% endblock %}
+
+{% block script %}
+<script src="https://js.tappaysdk.com/tpdirect/v5.7.0"></script>
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/order.js') }}"></script> -->
+{% endblock %}

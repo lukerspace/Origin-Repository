@@ -2,13 +2,10 @@ import sys
 from flask import *
 sys.path.append("..")
 from sql import cursor, conn , mysql_select
-# from os.path import dirname,abspath
-# directory=dirname(dirname(abspath(__file__)))
-# sys.path.append(directory)
 
-attraction_api = Blueprint('attraction_api', __name__)
+appAttraction = Blueprint('attraction_api', __name__)
 
-@attraction_api.route('/attractions')
+@appAttraction.route('/attractions')
 def attractions():
 	if request.args.get('page'):
 		page = request.args.get('page')
@@ -35,7 +32,7 @@ def attractions():
 			return jsonify(data)
 	return {"error": True,"message": "伺服器內部錯誤"}, 500
 
-@attraction_api.route('/attraction/<int:ID>')
+@appAttraction.route('/attraction/<int:ID>')
 def api_attraction(ID):
 	if ID:
 		cursor.execute(f"SELECT * FROM attraction where id={ID}")
@@ -48,5 +45,9 @@ def api_attraction(ID):
 	
 	return jsonify({ "error": True, "message": "伺服器內部錯誤" })
 
-
-# app.run(port=3000)
+# 調整目錄導向。
+# 
+# from sql import cursor, conn , mysql_select
+# from os.path import dirname,abspath
+# directory=dirname(dirname(abspath(__file__)))
+# sys.path.append(directory)

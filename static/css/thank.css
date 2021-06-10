@@ -1,0 +1,345 @@
+.welcome {
+    position: relative;
+    top: 54px;
+ 
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 23px;
+ 
+    display: flex;
+    align-items: center;
+ 
+    margin: 55px auto;
+    padding: 0px 100px;
+ 
+    width: 1200px;
+    max-width: 90%;
+ 
+    color: #666666;
+ }
+ 
+ /* order-information */
+ .order-information {
+    display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+    gap: 35px;
+ 
+    position: relative;
+    top: 55px;
+ 
+    margin-bottom: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 100px;
+    
+    width: 1200px;
+    max-width: 87%;
+    min-height: 65vh;
+ }
+ 
+ .order-information .order-number {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 13px;
+    
+    display: flex;
+    align-items: center;
+ 
+    color: #666666;
+ }
+ 
+ .order-information .order-attraction {
+    display: flex; flex-direction: row; 
+    width: 100%;
+    gap: 22px;
+ 
+    position: relative;
+ 
+    padding: 0px 10px;
+ }
+ 
+ .order-information .order-attraction .delete-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+ 
+    width: 30px;
+    height: 30px;
+ }
+ 
+ .order-information .order-attraction .delete-icon:hover {
+    cursor: pointer;
+    
+    border: 3px ridge rgb(0, 68, 255);
+    border-radius: 5px;
+ 
+    transform: scale(1.5);
+ }
+ 
+ .order-information .order-attraction .delete-icon img {
+    width: 100%;
+    height: 100%;
+ 
+    object-fit: cover;
+ }
+ 
+ .order-information .order-attraction .attraction-image {
+    width: 255px;
+    height: 200px;
+ 
+    border-radius: 5px;
+ }
+ 
+ .order-information .order-attraction .attraction-image img {
+    width: 100%;
+    height: 100%;
+ 
+    border-radius: 5px;
+ 
+    object-fit: cover;
+ }
+ 
+ .order-information .order-attraction .information {
+    display: flex; flex-direction: column;
+    gap: 30px;
+ 
+    padding-top: 10px;
+ }
+ 
+ 
+ .order-information .order-attraction .information .name {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    
+    display: flex;
+    align-items: center;
+    
+    color: #448899;
+ }
+ 
+ .order-information .order-attraction .information .detail {
+    display: grid;
+    grid-template-columns: 50px 400px;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 10px 5px;
+ 
+    justify-items: flex-start;
+    align-items: center;
+ }
+ 
+ .order-information .order-attraction .information .detail .date-title,
+ .order-information .order-attraction .information .detail .date,
+ .order-information .order-attraction .information .detail .time-title,
+ .order-information .order-attraction .information .detail .time,
+ .order-information .order-attraction .information .detail .fee-title,
+ .order-information .order-attraction .information .detail .fee,
+ .order-information .order-attraction .information .detail .address-title, 
+ .order-information .order-attraction .information .detail .address {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+ 
+    color: #666666;
+ }
+ 
+ .order-information .order-attraction .information .detail .date,
+ .order-information .order-attraction .information .detail .time,
+ .order-information .order-attraction .information .detail .fee,
+ .order-information .order-attraction .information .detail .address {
+    font-weight: normal;
+ }
+ 
+ /* user data */
+ .order-information .user-data,
+ .order-information .credit-card-data {
+    display: flex; flex-direction: column;
+    gap: 20px;
+ }
+ 
+ .order-information .user-data .title,
+ .order-information .credit-card-data .title {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    
+    display: flex;
+    align-items: center;
+ 
+    color: #666666;
+ }
+ 
+ .order-information .user-data .user-detail {
+    display: grid; align-items: center;
+    grid-template-columns: 80px 200px;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 15px 0px;
+ 
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    
+    color: #666666;   
+ }
+ 
+ .order-information .user-data .user-detail .contact-name,
+ .order-information .user-data .user-detail .contact-email,
+ .order-information .user-data .user-detail .contact-phone {
+    display: flex;
+    align-items: center;
+ 
+    width: 200px;
+    height: 40px;
+ 
+    padding: 0px 10px;
+ 
+    border: none;
+    outline: none;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+ 
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+   
+    color: #000000;   
+ }
+ 
+ .order-information .user-data .notice-message {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    
+    color: #666666;   
+ }
+ 
+ hr {
+    position: relative;
+    right: 100px;
+    width: 1200px;
+    max-width: 90vw;
+    height: 0px;
+    
+    border: 1px solid #E8E8E8;   
+ }
+ 
+ /* Footer */
+ .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    position: relative;
+    top: 54px;
+    width: var(--window-width);
+    max-width: 100%;
+    height: var(--footer-height);
+    bottom: 0px;
+       
+    background: #757575;   
+ }
+ 
+ .footer .text{
+    width: 234px;
+    height: 24px;
+ 
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    
+    display: flex;
+    align-items: center;
+ 
+    padding: 5px 0px;
+       
+    color: #FFFFFF;
+ }
+
+ @media (max-width: 1100px) {
+    .order-information .order-attraction .information .detail {
+   grid-template-columns: 50px 250px;
+   }
+}
+
+@media (max-width: 900px) {  
+   .order-information {
+   width: 100%;
+   max-width: 100%;
+
+   padding: 0;
+}
+
+   .order-information .order-number {
+      width: 100%;
+      max-width: 100%;
+
+      padding: 0 10px;
+   }
+
+   /* order-attraction */
+   .order-information .order-attraction {
+      display: flex; flex-direction: column;
+      position: relative;
+      gap: 7px;
+   }
+
+   .order-information .order-attraction .attraction-image {
+      width: 100%;
+      height: auto;
+
+      border-radius: 5px;
+   }
+
+   /* user data */
+   .order-information .user-data {
+      padding: 0px 10px;      
+   }
+
+   /* member page */
+   .orders-list {
+      width: 100%;
+      max-width: 100%;
+
+      padding: 0;
+   }
+
+   .orders-list .no-result {
+      margin-left: 10px;
+   }
+
+   /* for all hr */
+   hr {
+      position: relative;
+      right: 0;
+      width: 95vw;
+      max-width: 100%;
+      margin: 0 auto;
+   }
+}
+@media (max-width: 600px) {
+   .welcome{
+      /* align-items: flex-start; */
+      line-height: 23px;
+      padding:0%;
+      width:90%;
+   }
+   .title.notice-message{
+      line-height: 23px;
+   }
+   .order-information .order-attraction .information .detail {
+      grid-template-columns: 50px 250px;
+      line-height: 23px;
+   }
+}

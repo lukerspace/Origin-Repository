@@ -13,11 +13,12 @@
     <header>
         <div class="header">
             <div class="header-box">
-                <a href="/" style="text-decoration:none"><h1>台北一日遊</h1>
+                <a href="/" class="taipei"><h1>台北一日遊</h1></a>
                 <nav class="navbar">
                     <ul>
-                        <li><a href="#">預定行程</a></li>
-                        <li><a href="#">登入註冊</a></li>
+                        <li id="schedule"><a href="#">預定行程</a></li>
+                        <li class="hide" id="logInSignUp"><a href="#">登入/註冊</a></li>
+                        <li class="hide" id="logOut" hidden><a href="#">登出系統</a></li>
                     </ul>
                 </nav>
             </div>
@@ -25,10 +26,74 @@
         <div class="occupy"></div>
     </header>
 
+    <main>
+        <!-- 登入介面 -->
+        <section class="pop-up" id="logIn">
+            <div class=pop-up-modal>
+                <img src="{{url_for('static', filename='pic/close.png')}}" alt="關閉" class="close" id=logInClose>
+                <!-- <div class="close" id=logInClose>X</div> -->
+                <div class="top-gradient"></div>
+                <h3 class="header3-bold">登入會員帳號</h3>
+                <form action="/api/user" id="logInForm">
+                    <div class="form-control">
+                        <input type="email" placeholder="輸入電子信箱" name="email" class="input body-reg" id="logInEmail">
+                        <img src="{{url_for('static', filename='pic/error.png')}}" alt="">
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control">
+                        <input type="password" placeholder="輸入密碼" name="password" class="input body-reg" id="logInPassword">
+                        <img src="{{url_for('static', filename='pic/error.png')}}" alt="">
+                        <small>Error Message</small>
+                    </div>
+                    <button class=button-reg>登入帳戶</button>
+                </form>
+                <span class="body-reg" id="logInMessage"></span>
+                <p class="body-reg" id="signUpLink">還沒有帳戶？點此註冊</p>
+            </div>
+        </section>
+
+        <!-- sign up pop up -->
+        <section class="pop-up" id="signUp">
+            <div class="pop-up-modal">
+                <img src="{{url_for('static', filename='pic/close.png')}}" alt="關閉" class="close" id=signUpClose>
+                <!-- <div class="close" id=signUpClose>X</div> -->
+                <div class="top-gradient"></div>
+                <h3 class="header3-bold">註冊會員帳號</h3>
+                <form action="/api/user" id="signUpForm">
+                    <div class="form-control">
+                        <input type="text" placeholder="輸入姓名" name="name" class="input body-reg" id="signUpName">
+                        <img src="{{url_for('static', filename='pic/error.png')}}" alt="">
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control">
+                        <input type="email" placeholder="輸入電子信箱" name="email" class="input body-reg" id="signUpEmail">
+                        <img src="{{url_for('static', filename='pic/error.png')}}" alt="">
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control">
+                        <input type="password" placeholder="輸入密碼" name="password" class="input body-reg" id="signUpPassword">
+                        <img src="{{url_for('static', filename='pic/error.png')}}" alt="">
+                        <small>Error Message</small>
+                    </div>
+                    <button class=button-reg>註冊新帳戶</button>
+                </form>
+                <span class="body-reg" id="signUpMessage"></span>
+                <p class="body-reg" id="logInLink">已經有帳戶了？點此登入</p>
+            </div>
+        </section>
+
+
+    </main>
+      
+
+    </header>
+
+    
+<!-- 主頁面 -->
     <main>{% block main %}{% endblock %}</main>
 
-    <footer><p>COPYRIGHT © 2021 台北一日遊</p></footer>
-
+    <footer><p>COPYRIGHT ©  2021 台北一日遊</p></footer>
+    <script src="{{url_for('static',filename='js/sign.js')}}"></script>
     {% block script %}{% endblock %}
 </body>
 </html>
