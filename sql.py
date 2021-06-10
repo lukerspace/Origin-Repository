@@ -12,8 +12,8 @@ import json
 load_dotenv()
 # 只適用在booking sql
 
-try:
-   connection_pool = pooling.MySQLConnectionPool(
+
+connection_pool = pooling.MySQLConnectionPool(
       host = os.getenv("SERVER_HOST"),
       # port = os.getenv("SERVER_PORT"),
       user = os.getenv("SERVER_USER"),
@@ -21,9 +21,8 @@ try:
       database = "taipei",
       charset = "utf8",
       auth_plugin='mysql_native_password'
-      )
-except Exception as e:
-   print(e)  
+   )
+
 
 connection_object = connection_pool.get_connection()
 if connection_object.is_connected():
