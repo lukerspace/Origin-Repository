@@ -8,27 +8,29 @@ from dotenv import load_dotenv
 import os
 import json
 # 連結資料庫
-
-conn = conn=mysql.connector.connect(host = "localhost",user=input("Enter username: "),password=getpass("Enter password: "), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
-# conn = conn=mysql.connector.connect(host = "localhost",user="root",password="0000", database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
-cursor = conn.cursor()
-
 ## 啟動資料庫
 load_dotenv()
 # 只適用在booking sql
 
-# try:
-#    connection_pool = pooling.MySQLConnectionPool(
-#       host = os.getenv("SERVER_HOST"),
-#       # port = os.getenv("SERVER_PORT"),
-#       user = os.getenv("SERVER_USER"),
-#       password = os.getenv("SERVER_PASSWORD"),
-#       database = "taipei",
-#       charset = "utf8",
-#       auth_plugin='mysql_native_password'
-#       )
-# except Exception as e:
-#    print(e)  
+try:
+   connection_pool = pooling.MySQLConnectionPool(
+      host = os.getenv("SERVER_HOST"),
+      # port = os.getenv("SERVER_PORT"),
+      user = os.getenv("SERVER_USER"),
+      password = os.getenv("SERVER_PASSWORD"),
+      database = "taipei",
+      charset = "utf8",
+      auth_plugin='mysql_native_password'
+      )
+except Exception as e:
+   print(e)  
+
+connection_object = connection_pool.get_connection()
+if connection_object.is_connected():
+   print("SQL is connected!!")
+   connection_object.close()
+
+
 
 # taipeiDB = init_db()
 # taipeiCursor = taipeiDB.cursor()
@@ -40,48 +42,72 @@ def closePool(connection_object, taipeiCursor):
       taipeiCursor.close()
       connection_object.close()
 
+
+# conn = conn=mysql.connector.connect(host = "localhost",user=input("Enter username: "),password=getpass("Enter password: "), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
+conn = conn=mysql.connector.connect(host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),password=os.getenv("SERVER_PASSWORD"), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
+cursor = conn.cursor()
 # attraction
 def mysql_select(sql):
-	cursor.execute(sql)
-	sql_result = cursor.fetchall()
-	attraction_list = []
-	for attration in sql_result:
-		temp_attr = dict(zip(cursor.column_names, attration))
-		temp_attr['images'] = json.loads(attration[9])
-		attraction_list.append(temp_attr)
-	
-	return attraction_list
+   conn=mysql.connector.connect(
+      host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),
+      password=os.getenv("SERVER_PASSWORD"), database = "taipei",
+      charset = "utf8",auth_plugin='mysql_native_password'
+      )
+   cursor = conn.cursor()
+   cursor.execute(sql)
+   sql_result = cursor.fetchall()
+   attraction_list = []
+   for attration in sql_result:
+      temp_attr = dict(zip(cursor.column_names, attration))
+      temp_attr['images'] = json.loads(attration[9])
+      attraction_list.append(temp_attr)
+   cursor.close()   
+   return attraction_list
 
 
 # user
 def user_select(**kargs):
-    sql=f'select * from user where '
-    for i in kargs:
-        sql+=f'{i} = \'{kargs[i]}\' and '
-    sql=sql[:-5]
+   conn=mysql.connector.connect(
+      host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),
+      password=os.getenv("SERVER_PASSWORD"),database = "taipei",
+      charset = "utf8",auth_plugin='mysql_native_password'
+    )
+   cursor = conn.cursor()
+   sql=f'select * from user where '
+   for i in kargs:
+      sql+=f'{i} = \'{kargs[i]}\' and '
+   sql=sql[:-5]
     # print(sql)
-    cursor.execute(sql)
-    user=cursor.fetchone()
-    if user:
+   cursor.execute(sql)
+   user=cursor.fetchone()
+   if user:
         userdata=(dict(zip(cursor.column_names,user)))
         print(userdata)
+        cursor.close()
         return userdata
-    else:
+   else:
         return None
 
 def user_insert(**kargs):
-    sql=f'insert into user '
-    column = '('
-    value = '('
-    for i in kargs:
+   conn=mysql.connector.connect(
+      host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),
+      password=os.getenv("SERVER_PASSWORD"),database = "taipei",
+      charset = "utf8",auth_plugin='mysql_native_password'
+   )
+   cursor = conn.cursor()
+   sql=f'insert into user '
+   column = '('
+   value = '('
+   for i in kargs:
         column += i + ','
         value += f"\'{kargs[i]}\',"
-    column = column[:-1] + ')'
-    value = value[:-1] + ')'
-    sql += column + ' VALUES ' + value
-    print(sql)
-    cursor.execute(sql)
-    conn.commit()
+   column = column[:-1] + ')'
+   value = value[:-1] + ')'
+   sql += column + ' VALUES ' + value
+   print(sql)
+   cursor.execute(sql)
+   conn.commit()
+   cursor.close()
    
 # 
 # ====================
