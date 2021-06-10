@@ -26,7 +26,7 @@ connection_pool = pooling.MySQLConnectionPool(
 
 connection_object = connection_pool.get_connection()
 if connection_object.is_connected():
-   print("SQL is connected!!")
+   print("SQL is connected~~")
    connection_object.close()
 
 

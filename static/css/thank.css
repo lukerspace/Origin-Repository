@@ -6,7 +6,7 @@
     font-style: normal;
     font-weight: bold;
     font-size: 19px;
-    line-height: 16px;
+    line-height: 23px;
  
     display: flex;
     align-items: center;
@@ -331,9 +331,12 @@
 @media (max-width: 600px) {
    .welcome{
       /* align-items: flex-start; */
-      line-height: 20px;
+      line-height: 23px;
       padding:0%;
       width:90%;
+   }
+   .title.notice-message{
+      line-height: 23px;
    }
    .order-information .order-attraction .information .detail {
       grid-template-columns: 50px 250px;
