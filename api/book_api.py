@@ -29,10 +29,10 @@ def getBooking():
                "time": selectedBooking["time"],
                "price": selectedBooking["price"],
             }
-            print("客戶:",session["user"]["name"],"有訂單")
+            # print("客戶:",session["user"]["name"],"有訂單")
             return jsonify({ "data": data })
          else:
-            print("客戶:",session["user"]["name"],"沒有訂單")
+            # print("客戶:",session["user"]["name"],"沒有訂單")
             return jsonify({ "data": None })
       else:
          print("尚未登入")
@@ -60,7 +60,7 @@ def postBooking():
             return jsonify({ "error": True, "message": "建立失敗，輸入不正確或其他原因" })
          
          originBooking = selectBooking(userId = userId)
-         print(originBooking,"原本訂單")
+         # print(originBooking,"原本訂單")
 
          if originBooking:
             updateBooking(userId, attractionId = attractionId, date = date, time = time, price = price)
