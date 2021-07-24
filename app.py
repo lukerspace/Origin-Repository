@@ -1,10 +1,7 @@
 from flask import *
 from getpass import getpass
-from config import Config
 import platform
-# import os
-# import json
-# import mysql.connector 
+
 
 from api.attraction_api import appAttraction 
 from api.user_api import appUser
@@ -36,9 +33,6 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
-
-# app.run(port=3000)
-# app.run(host="0.0.0.0",port=3000)
 
 if __name__ == "__main__":
 	if platform.system().lower() == "linux":
