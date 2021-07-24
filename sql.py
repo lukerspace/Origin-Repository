@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 import os
 import json
 # 連結資料庫
+## 啟動資料庫
 load_dotenv()
 # 只適用在booking sql
 
@@ -29,6 +30,9 @@ if connection_object.is_connected():
    connection_object.close()
 
 
+
+# taipeiDB = init_db()
+# taipeiCursor = taipeiDB.cursor()
 
 # 關閉資料庫
 
@@ -104,7 +108,8 @@ def user_insert(**kargs):
    conn.commit()
    cursor.close()
    
-
+# 
+# ====================
 # for /api/booking
 def selectBooking(**kwargs):
    try:
@@ -178,7 +183,7 @@ def insertBooking(**kwargs):
             INSERT INTO booking({ insertColumn })
             VALUES ({ insertValue })
             """
-
+      print(sql_cmd)
       connection_object = connection_pool.get_connection()
 
       if connection_object.is_connected():

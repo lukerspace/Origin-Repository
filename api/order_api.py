@@ -1,6 +1,5 @@
 import sys
 sys.path.append("..")
-
 from flask import request, Blueprint, jsonify, session
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
