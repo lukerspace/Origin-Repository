@@ -5,47 +5,22 @@ from dotenv import load_dotenv
 from getpass import getpass
 from mysql.connector import pooling
 from dotenv import load_dotenv
-import os
-import json
-# 連結資料庫
-## 啟動資料庫
+
+## 資料庫敏感性資料
 load_dotenv()
-# 只適用在booking sql
-
-
-connection_pool = pooling.MySQLConnectionPool(
-      host = os.getenv("SERVER_HOST"),
-      # port = os.getenv("SERVER_PORT"),
-      user = os.getenv("SERVER_USER"),
-      password = os.getenv("SERVER_PASSWORD"),
-      database = "taipei",
-      charset = "utf8",
-      auth_plugin='mysql_native_password'
-   )
-
-
-connection_object = connection_pool.get_connection()
-if connection_object.is_connected():
-   print("SQL is connected~~")
-   connection_object.close()
-
-
-
-# taipeiDB = init_db()
-# taipeiCursor = taipeiDB.cursor()
 
 # 關閉資料庫
-
 def closePool(connection_object, taipeiCursor):
    if connection_object.is_connected():
       taipeiCursor.close()
       connection_object.close()
 
-
-# conn = conn=mysql.connector.connect(host = "localhost",user=input("Enter username: "),password=getpass("Enter password: "), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
+# 連接資料庫
 conn = conn=mysql.connector.connect(host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),password=os.getenv("SERVER_PASSWORD"), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
 cursor = conn.cursor()
-# attraction
+
+# MYSQL CMD
+# 選取景點
 def mysql_select(sql):
    conn=mysql.connector.connect(
       host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),
@@ -64,7 +39,8 @@ def mysql_select(sql):
    return attraction_list
 
 
-# user
+# 新增會員資料 選取使用者會員，新增使用者會員
+# 選取使用者會員
 def user_select(**kargs):
    conn=mysql.connector.connect(
       host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),
@@ -86,7 +62,7 @@ def user_select(**kargs):
         return userdata
    else:
         return None
-
+# 新增使用者
 def user_insert(**kargs):
    conn=mysql.connector.connect(
       host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),
@@ -107,10 +83,10 @@ def user_insert(**kargs):
    cursor.execute(sql)
    conn.commit()
    cursor.close()
-   
-# 
-# ====================
-# for /api/booking
+
+
+# 預定景點功能 新增 選取 刪除 更新
+# 選取預定景點
 def selectBooking(**kwargs):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -152,7 +128,7 @@ def selectBooking(**kwargs):
       return None
    finally:
       closePool(connection_object, taipeiCursor)        
-
+# 新增預定景點
 def insertBooking(**kwargs):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -183,7 +159,7 @@ def insertBooking(**kwargs):
             INSERT INTO booking({ insertColumn })
             VALUES ({ insertValue })
             """
-      print(sql_cmd)
+
       connection_object = connection_pool.get_connection()
 
       if connection_object.is_connected():
@@ -197,7 +173,7 @@ def insertBooking(**kwargs):
       print(e)
    finally:
       closePool(connection_object, taipeiCursor)        
-
+# 更新預定景點
 def updateBooking(userId, **kwargs):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -238,7 +214,7 @@ def updateBooking(userId, **kwargs):
       print(e)
    finally:
       closePool(connection_object, taipeiCursor)        
-
+# 刪除預定景點
 def deleteBookingData(**kwargs):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -272,8 +248,8 @@ def deleteBookingData(**kwargs):
       closePool(connection_object, taipeiCursor)     
 
 
-# API
-# for /api/order
+# 訂單下單功能 新增訂單 選取訂單
+# 訂單下單
 def insertOrder(**kwargs):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -316,7 +292,7 @@ def insertOrder(**kwargs):
       print(e)
    finally:
       closePool(connection_object, taipeiCursor)        
-
+# 選取訂單一筆
 def selectOrder(number, userId):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -359,7 +335,7 @@ def selectOrder(number, userId):
       return None
    finally:
       closePool(connection_object, taipeiCursor) 
-
+# 更新訂單
 def updateOrder(number, **kwargs):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -401,7 +377,7 @@ def updateOrder(number, **kwargs):
       print(e)
    finally:
       closePool(connection_object, taipeiCursor)
-
+# 選取訂單多筆
 def selectOrders(userId):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -443,9 +419,9 @@ def selectOrders(userId):
       return None
    finally:
       closePool(connection_object, taipeiCursor)
-
-
-def insertOrder(**kwargs):
+# 選取多筆訂單
+def selectAll(userId):
+   userAllOrder=[]
    try:
       connection_pool = pooling.MySQLConnectionPool(
          host = os.getenv("SERVER_HOST"),
@@ -456,160 +432,28 @@ def insertOrder(**kwargs):
          charset = "utf8",
          auth_plugin='mysql_native_password'
          )
-   except Exception as e:
-      print(e)  
-   try:
-      insertColumn = ''
-      insertValue = ''
-
-      for key in kwargs:
-         insertColumn += f"{ key }, "
-         if type(kwargs[key]) == str:
-            insertValue += f"'{ kwargs[key] }', "
-         else: 
-            insertValue += f"{ kwargs[key] }, "
-
-      insertColumn = insertColumn[:-2]
-      insertValue = insertValue[:-2]
-
-      sql_cmd = f"""
-            INSERT INTO orders ({ insertColumn })
-            VALUES ({ insertValue })
-            """
-
-      connection_object = connection_pool.get_connection()
-
-      if connection_object.is_connected():
-         taipeiCursor = connection_object.cursor()
-         taipeiCursor.execute(sql_cmd)             
-         connection_object.commit()
    except Exception as e:
       print(e)
-   finally:
-      closePool(connection_object, taipeiCursor)        
-
-def selectOrder(number, userId):
-   try:
-      connection_pool = pooling.MySQLConnectionPool(
-         host = os.getenv("SERVER_HOST"),
-         # port = os.getenv("SERVER_PORT"),
-         user = os.getenv("SERVER_USER"),
-         password = os.getenv("SERVER_PASSWORD"),
-         database = "taipei",
-         charset = "utf8",
-         auth_plugin='mysql_native_password'
-         )
-   except Exception as e:
-      print(e)     
    try:
       sql_cmd = f"""
-               SELECT 
-                  o.number, o.price, o.date, o.time, o.status, o.attractionId, o.phone,
-                  a.name AS attr_name, a.address, a.images,
-                  u.name AS user_name, u.email
+               SELECT * 
                FROM orders o
-               JOIN attraction a ON o.attractionId = a.id
-               JOIN user u ON o.userId = u.id
-               WHERE o.number = '{ number }' AND o.userId = { userId }
+               LEFT JOIN  user u
+               ON o.userId = u.id
+               WHERE o.userId= { userId }
                """
-
-      connection_object = connection_pool.get_connection()
-
-      if connection_object.is_connected():
-         taipeiCursor = connection_object.cursor()
-         taipeiCursor.execute(sql_cmd)                
-         taipeiResult = taipeiCursor.fetchone()
-
-      if taipeiResult:
-         orderData = dict(zip(taipeiCursor.column_names, taipeiResult))
-         return orderData
-      else:
-         return None
-   except Exception as e:
-      print(e)
-      return None
-   finally:
-      closePool(connection_object, taipeiCursor) 
-
-def updateOrder(number, **kwargs):
-   try:
-      connection_pool = pooling.MySQLConnectionPool(
-         host = os.getenv("SERVER_HOST"),
-         # port = os.getenv("SERVER_PORT"),
-         user = os.getenv("SERVER_USER"),
-         password = os.getenv("SERVER_PASSWORD"),
-         database = "taipei",
-         charset = "utf8",
-         auth_plugin='mysql_native_password'
-         )
-   except Exception as e:
-      print(e)  
-   try:
-      updateColumnAndValue = ""
-
-      for key in kwargs:
-         if type(kwargs[key]) == str:
-            updateColumnAndValue += f"{ key } = '{ kwargs[key] }', "
-         else: 
-            updateColumnAndValue += f"{ key } = { kwargs[key] }, "
-
-      updateColumnAndValue = updateColumnAndValue[:-2]
-
-      sql_cmd = f"""
-            UPDATE orders 
-            SET { updateColumnAndValue }
-            WHERE number = '{ number }'
-            """
-
-      connection_object = connection_pool.get_connection()
-
-      if connection_object.is_connected():
-         taipeiCursor = connection_object.cursor()
-         taipeiCursor.execute(sql_cmd)                
-         connection_object.commit()            
-   except Exception as e:
-      print(e)
-   finally:
-      closePool(connection_object, taipeiCursor)
-
-def selectOrders(userId):
-   try:
-      connection_pool = pooling.MySQLConnectionPool(
-         host = os.getenv("SERVER_HOST"),
-         # port = os.getenv("SERVER_PORT"),
-         user = os.getenv("SERVER_USER"),
-         password = os.getenv("SERVER_PASSWORD"),
-         database = "taipei",
-         charset = "utf8",
-         auth_plugin='mysql_native_password'
-         )
-   except Exception as e:
-      print(e)  
-   orderDataList = []
-   try:
-      sql_cmd = f"""
-               SELECT o.number, o.attractionId, o.status, a.name AS attr_name
-               FROM orders o
-               JOIN attraction a ON o.attractionId = a.id
-               WHERE o.userId = { userId }
-               """
-
       connection_object = connection_pool.get_connection()
 
       if connection_object.is_connected():
          taipeiCursor = connection_object.cursor()
          taipeiCursor.execute(sql_cmd)                
          taipeiResults = taipeiCursor.fetchall()
-
+         connection_object.close()
       if taipeiResults:
          for taipeiResult in taipeiResults:
             orderData = dict(zip(taipeiCursor.column_names, taipeiResult))
-            orderDataList.append(orderData)
-         return orderDataList
-      else:
-         return None
-   except Exception as e:
+            userAllOrder.append(orderData)
+         return userAllOrder
+   except:
       print(e)
-      return None
-   finally:
-      closePool(connection_object, taipeiCursor)
+
