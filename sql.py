@@ -377,7 +377,7 @@ def updateOrder(number, **kwargs):
       print(e)
    finally:
       closePool(connection_object, taipeiCursor)
-# 選取訂單多筆
+# 選取訂單多筆 顯示訂單景點
 def selectOrders(userId):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -419,7 +419,7 @@ def selectOrders(userId):
       return None
    finally:
       closePool(connection_object, taipeiCursor)
-# 選取多筆訂單
+# 選取多筆訂單 顯示訂單付款狀況
 def selectAll(userId):
    userAllOrder=[]
    try:
