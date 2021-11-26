@@ -1,8 +1,14 @@
-import sys
+import sys,os
 from flask import *
 sys.path.append("..")
-from sql import cursor, conn , mysql_select
+from sql import  mysql_select
+import mysql.connector
+from dotenv import load_dotenv
 
+## 資料庫敏感性資料
+load_dotenv()
+
+# api路由
 appAttraction = Blueprint('attraction_api', __name__)
 
 @appAttraction.route('/attractions')
@@ -35,15 +41,19 @@ def attractions():
 @appAttraction.route('/attraction/<int:ID>')
 def api_attraction(ID):
 	if ID:
+		conn = conn=mysql.connector.connect(host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),password=os.getenv("SERVER_PASSWORD"), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
+		cursor = conn.cursor()
 		cursor.execute(f"SELECT * FROM attraction where id={ID}")
 		data = cursor.fetchone()
 		if data:
 			attraction = {"data": dict(zip(cursor.column_names, data))}
 			attraction['data']['images'] = json.loads(data[9])
+			
 			return attraction
 		return jsonify({ "error": True, "message": "景點編號不正確" })
 	
 	return jsonify({ "error": True, "message": "伺服器內部錯誤" })
+
 
 # 調整目錄導向。
 # 
