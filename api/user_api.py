@@ -1,12 +1,16 @@
-import sys
+import sys,os,mysql.connector
 sys.path.append("..")
+from dotenv import load_dotenv
 from flask import *
 from flask import session
-from sql import cursor, conn, user_select, user_insert
+from sql import  user_select, user_insert
 
+# api路由
 appUser = Blueprint('appUser', __name__)
 
-# appUser.secret_key="hello"
+## 資料庫敏感性資料
+load_dotenv()
+
 
 @appUser.route('/user', methods=['GET'])
 def get_userdata():
@@ -26,6 +30,7 @@ def get_userdata():
 @appUser.route('/user', methods=['POST'])
 def signup():
     try:
+        conn = conn=mysql.connector.connect(host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),password=os.getenv("SERVER_PASSWORD"), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
         conn.reconnect(attempts=1, delay=0)
         data = request.json
         name = data['name']
@@ -59,6 +64,7 @@ def signup():
 @appUser.route('/user', methods=['PATCH'])
 def signin():
     try:
+        conn = conn=mysql.connector.connect(host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),password=os.getenv("SERVER_PASSWORD"), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
         conn.reconnect(attempts=1, delay=0)
         data = request.json
         email = data['email']

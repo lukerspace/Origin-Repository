@@ -1,10 +1,7 @@
 import mysql.connector
-import json
-import os
+import json,os
 from dotenv import load_dotenv
-from getpass import getpass
 from mysql.connector import pooling
-from dotenv import load_dotenv
 
 ## 資料庫敏感性資料
 load_dotenv()
@@ -14,13 +11,8 @@ def closePool(connection_object, taipeiCursor):
    if connection_object.is_connected():
       taipeiCursor.close()
       connection_object.close()
-
-# 連接資料庫
-conn = conn=mysql.connector.connect(host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),password=os.getenv("SERVER_PASSWORD"), database = "taipei",charset = "utf8",auth_plugin='mysql_native_password')
-cursor = conn.cursor()
-
-# MYSQL CMD
-# 選取景點
+# # 景點選取
+# 選取景點資料庫
 def mysql_select(sql):
    conn=mysql.connector.connect(
       host = os.getenv("SERVER_HOST"),user=os.getenv("SERVER_USER"),
@@ -37,8 +29,6 @@ def mysql_select(sql):
       attraction_list.append(temp_attr)
    cursor.close()   
    return attraction_list
-
-
 # 新增會員資料 選取使用者會員，新增使用者會員
 # 選取使用者會員
 def user_select(**kargs):
@@ -83,8 +73,6 @@ def user_insert(**kargs):
    cursor.execute(sql)
    conn.commit()
    cursor.close()
-
-
 # 預定景點功能 新增 選取 刪除 更新
 # 選取預定景點
 def selectBooking(**kwargs):
@@ -246,8 +234,6 @@ def deleteBookingData(**kwargs):
       print(e)
    finally:
       closePool(connection_object, taipeiCursor)     
-
-
 # 訂單下單功能 新增訂單 選取訂單
 # 訂單下單
 def insertOrder(**kwargs):
@@ -377,7 +363,7 @@ def updateOrder(number, **kwargs):
       print(e)
    finally:
       closePool(connection_object, taipeiCursor)
-# 選取訂單多筆
+# 選取訂單多筆 顯示訂單景點
 def selectOrders(userId):
    try:
       connection_pool = pooling.MySQLConnectionPool(
@@ -419,7 +405,7 @@ def selectOrders(userId):
       return None
    finally:
       closePool(connection_object, taipeiCursor)
-# 選取多筆訂單
+# 選取多筆訂單 顯示訂單付款狀況
 def selectAll(userId):
    userAllOrder=[]
    try:

@@ -1,7 +1,7 @@
 from flask import *
 from getpass import getpass
 import platform
-
+import sql
 
 from api.attraction_api import appAttraction 
 from api.user_api import appUser
@@ -33,6 +33,16 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
+
+@app.route("/member")
+def member():
+	if "user" in session:
+		userId = int(session["user"]["id"])
+		allorder=(sql.selectAll(userId))
+		return render_template("member.html",userorder=allorder)
+	else:
+		return redirect("/")
+
 
 if __name__ == "__main__":
 	if platform.system().lower() == "linux":
