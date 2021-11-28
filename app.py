@@ -38,8 +38,13 @@ def thankyou():
 def member():
 	if "user" in session:
 		userId = int(session["user"]["id"])
+		user=session["user"]
 		allorder=(sql.selectAll(userId))
-		return render_template("member.html",userorder=allorder)
+		if allorder:
+			return render_template("member.html",userorder=allorder,user=user)
+		else:
+			noOrder="目前暫無訂單"
+			return render_template("member.html",noOrder=noOrder,user=user)
 	else:
 		return redirect("/")
 
