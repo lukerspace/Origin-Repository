@@ -41,12 +41,7 @@ def member():
 		user=session["user"]
 		allorder=(sql.selectAll(userId))
 		if allorder:
-			print(allorder)
-			print(user)
 			return render_template("member.html",userorder=allorder,user=user)
-
-		# if len(allorder)>0:
-			# return render_template("member.html",userorder=allorder,user=user)
 		else:
 			noOrder="目前暫無訂單"
 			return render_template("member.html",noOrder=noOrder,user=user)
