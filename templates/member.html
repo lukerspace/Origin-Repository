@@ -7,29 +7,38 @@
   media="all"
 />
 {% endblock %} {% block main %}
-<h2>會員訂單紀錄</h2>
+<section class="mains">
+  <h2>{{user.name}} 會員訂單紀錄</h2>
+</section>
 
-{%for i in userorder %} {% if i.status == 1 %}
-<section>
-  <div>訂單號碼：{{i.number}}</div>
-  <div>姓名：{{i.name}}</div>
-  <div>日期：{{i.date}}</div>
-  <div>電子郵件：{{i.email}}</div>
-  <div>訂單時間：{{i.time}}</div>
-  <div>訂單金額：{{i.price}}</div>
-  <div>已成立訂單</div>
-  <br />
-</section>
-{% endif %} {% if i.status == 0 %}
-<section>
-  <div>訂單號碼：{{i.number}}</div>
-  <div>姓名：{{i.name}}</div>
-  <div>日期：{{i.date}}</div>
-  <div>電子郵件：{{i.email}}</div>
-  <div>訂單時間：{{i.time}}</div>
-  <div>訂單金額：{{i.price}}</div>
-  <div>未成立訂單</div>
-  <br />
-  {% endif %} {% endfor %}
-</section>
+<main class="mains" id="mains">
+  {%for i in userorder %} {% if i.status == 1 %}
+  <section>
+    <div>訂單號碼：{{i.number}}</div>
+    <div>姓名：{{i.name}}</div>
+    <div>日期：{{i.date}}</div>
+    <div>電子郵件：{{i.email}}</div>
+    <div>訂單時間：{{i.time}}</div>
+    <div>訂單金額：{{i.price}}</div>
+    <div>狀態：未結帳訂單</div>
+    <br />
+  </section>
+  {% endif %} {% if i.status == 0 %}
+  <section>
+    <div>訂單號碼：{{i.number}}</div>
+    <div>姓名：{{i.name}}</div>
+    <div>日期：{{i.date}}</div>
+    <div>電子郵件：{{i.email}}</div>
+    <div>訂單時間：{{i.time}}</div>
+    <div>訂單金額：{{i.price}}</div>
+    <div>狀態：已結帳，訂單成立</div>
+    <br />
+    {% endif %} {% endfor %}
+  </section>
+
+  <section class="mains" id="mains">
+    <div>{{ noOrder}}</div>
+  </section>
+</main>
+
 {% endblock %}
